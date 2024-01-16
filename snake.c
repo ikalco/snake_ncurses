@@ -165,6 +165,10 @@ bool snake_has_collided() {
 		return true;
 	}
 
+	for (struct Snake* curr = snake->next; curr != NULL; curr = curr->next) {
+		if (curr->x == snake->x && curr->y == snake->y) return true;
+	}
+
 	return false;
 }
 
