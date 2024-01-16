@@ -72,7 +72,17 @@ void init()
 	snake->y = 0;
 }
 
+void free_snake(struct Snake *s) {
+	if (s->next != NULL) {
+		free_snake(s->next);
+	}
+	
+	free(s);
+}
+
 void cleanup() {
+	free_snake(snake);
+
 	nocbreak();				// disable halfdelay
 	delwin(snake_win);
 	endwin();
