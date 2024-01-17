@@ -23,6 +23,7 @@ struct Snake {
 };
 
 struct Snake *snake;
+int apple_x, apple_y;
 
 void init_ncurses() {
 	// initialize ncurses
@@ -49,6 +50,20 @@ void init_ncurses() {
 	snake_win_width -= 2;
 }
 
+void init_snake() {
+	snake = malloc(sizeof(struct Snake));
+	snake->next = NULL;
+	snake->dir = RIGHT;
+	snake->prev_dir = RIGHT;
+	snake->x = 0;
+	snake->y = 0;
+}
+
+void init_apple() {
+	apple_x = snake_win_width - 1;
+	apple_y = snake_win_height - 1;
+}
+
 void draw_instructions() {
 	mvprintw((screen_height - 5)/2 + 0, 5, "Press 'q' to quit.");
 	mvprintw((screen_height - 5)/2 + 1, 5, "Press up arrow to move snake up.");
@@ -68,12 +83,8 @@ void init()
 	draw_title("Snake");
 	refresh(); // draw to 'screen'
 
-	snake = malloc(sizeof(struct Snake));
-	snake->next = NULL;
-	snake->dir = RIGHT;
-	snake->prev_dir = RIGHT;
-	snake->x = 0;
-	snake->y = 0;
+	init_snake();
+	init_apple();
 }
 
 void free_snake(struct Snake *s) {
