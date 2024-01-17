@@ -208,6 +208,11 @@ void check_has_eaten() {
 	grow_snake();
 }
 
+void change_dir(enum Dir dir) {
+	if (opposite_dir(snake->dir) == dir) return;
+	snake->dir = dir;
+}
+
 void loop()
 {
 	int ch;
@@ -218,10 +223,10 @@ void loop()
 		switch (ch)
 		{
 			case 'q':	quit = true;        break;
-			case KEY_LEFT:	snake->dir = LEFT;  break;
-			case KEY_RIGHT:	snake->dir = RIGHT; break;
-			case KEY_UP:	snake->dir = UP;    break;
-			case KEY_DOWN:	snake->dir = DOWN;  break;
+			case KEY_LEFT:	change_dir(LEFT);   break;
+			case KEY_RIGHT:	change_dir(RIGHT);  break;
+			case KEY_UP:	change_dir(UP);     break;
+			case KEY_DOWN:	change_dir(DOWN);   break;
 		}
 
 		// move the snake, check for colllisions 
