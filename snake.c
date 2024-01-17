@@ -60,8 +60,8 @@ void init_snake() {
 }
 
 void init_apple() {
-	apple_x = snake_win_width - 1;
-	apple_y = snake_win_height - 1;
+	apple_x = rand() % snake_win_width;
+	apple_y = rand() % snake_win_height;
 }
 
 void draw_instructions() {
@@ -156,8 +156,6 @@ void grow_snake() {
 void draw_snake() {
 	bool first = true;
 
-	mvprintw(1, 1, "x: %d | y: %d | dir: %d", snake->x, snake->y, snake->dir);
-	
 	// draw body
 	for (struct Snake* curr = snake; curr != NULL; curr = curr->next) {
 		if (first) {
