@@ -43,6 +43,10 @@ void init_ncurses() {
 			(screen_height-snake_win_height)/2,
 			(screen_width-snake_win_width)/2
 	);
+
+	// weird bug where you can't draw on entire window
+	snake_win_height -= 2;
+	snake_win_width -= 2;
 }
 
 void draw_instructions() {
@@ -169,8 +173,8 @@ void move_snake() {
 bool snake_has_collided() {
 	if (snake->x < 0 ||
 	    snake->y < 0 ||
-	    snake->x >= snake_win_width - 2 ||
-	    snake->y >= snake_win_height - 2
+	    snake->x >= snake_win_width ||
+	    snake->y >= snake_win_height
 	) {
 		return true;
 	}
