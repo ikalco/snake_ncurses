@@ -169,6 +169,10 @@ void draw_snake() {
 	}
 }
 
+void draw_apple() {
+	mvwprintw(snake_win, apple_y+1, apple_x+1, "A");
+}
+
 void move_snake() {
 	for (struct Snake* curr = snake; curr != NULL; curr = curr->next) {
 		if (curr->next != NULL) {
@@ -232,6 +236,7 @@ void loop()
 		// clear, draw border, draw snake, draw apple, draw to window
 		wclear(snake_win);
 		box(snake_win, 0, 0);
+		draw_apple();
 		draw_snake();
 		wrefresh(snake_win);
 	}
