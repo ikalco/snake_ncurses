@@ -197,6 +197,15 @@ bool snake_has_collided() {
 	return false;
 }
 
+void check_has_eaten() {
+	if (snake->x != apple_x || snake->y != apple_y) return;
+
+	apple_x = rand() % snake_win_width;
+	apple_y = rand() % snake_win_height;
+
+	grow_snake();
+}
+
 void loop()
 {
 	int ch;
@@ -206,19 +215,21 @@ void loop()
 	{
 		switch (ch)
 		{
-			case 'q':	quit = true;       break;
-			case 'a':	grow_snake();      break;
+			case 'q':	quit = true;        break;
 			case KEY_LEFT:	snake->dir = LEFT;  break;
 			case KEY_RIGHT:	snake->dir = RIGHT; break;
 			case KEY_UP:	snake->dir = UP;    break;
 			case KEY_DOWN:	snake->dir = DOWN;  break;
 		}
 
-		// move the snake, check for colllision
+		// move the snake, check for colllisions 
 		move_snake();
 		quit |= snake_has_collided();
-
-		// clear, draw border, draw snake, draw to window
+		
+		// check for apple eatings
+		check_has_eaten();
+		
+		// clear, draw border, draw snake, draw apple, draw to window
 		wclear(snake_win);
 		box(snake_win, 0, 0);
 		draw_snake();
