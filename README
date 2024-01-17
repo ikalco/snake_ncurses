@@ -1,0 +1,16 @@
+## Snake
+
+### Description
+It's the classic snake game, but implemented in C using the ncurses library.
+
+### How to build
+Use Make build system in repo folder
+```
+make
+```
+
+### How to run
+Depends on ncurses library so make sure it's installed, then just run locally
+```
+./snake
+```
